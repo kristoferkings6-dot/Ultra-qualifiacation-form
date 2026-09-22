@@ -2,23 +2,516 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Osapa London Private Property Briefing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Osapa London — Private Property Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#071a33;--gold:#d7af5b;--ink:#17202c;--muted:#667180;--line:#dce3e9;--bg:#f4f6f8;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}.hero{background:linear-gradient(135deg,#06162d,#102c50);color:#fff;padding:34px 20px}.wrap{max-width:720px;margin:auto}.eyebrow{color:#f1d28f;text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:800;margin:0 0 8px}.hero h1{font-family:Georgia,serif;font-weight:500;font-size:34px;line-height:1.12;margin:0 0 10px}.hero p{margin:0;color:#dbe4ef}.price{display:inline-block;color:#102440;background:#f0cc7a;border-radius:999px;padding:8px 14px;font-weight:800;margin-top:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px;margin:20px auto 40px;box-shadow:0 10px 24px rgba(21,39,54,.07)}fieldset{border:0;padding:0;margin:0 0 24px}legend{font-size:18px;font-weight:800;margin-bottom:8px}label{display:block;font-weight:650;margin:14px 0 6px}input,select{width:100%;padding:13px;border:1px solid #cbd5df;border-radius:9px;font:inherit;background:#fff}input:focus,select:focus{outline:3px solid rgba(215,175,91,.3);border-color:var(--gold)}.hint{font-size:13px;color:var(--muted);margin:0 0 10px}.option{display:flex;gap:10px;align-items:flex-start;font-weight:500;margin:9px 0}.option input{width:auto;margin-top:4px}.consent{font-size:13px;color:var(--muted);background:#f6f8fa;padding:12px;border-radius:9px}.btn{width:100%;border:0;border-radius:9px;background:var(--navy);color:#fff;font-size:16px;font-weight:800;padding:15px;cursor:pointer}.btn:hover{background:#123763}.result{display:none;margin-top:20px;padding:16px;border-radius:10px;background:#edf7f3;border:1px solid #b9dfcf}.result h2{margin:0 0 6px;color:#176044;font-size:20px}.footer{max-width:720px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:13px}
+  :root{
+    --ink:#14181f;
+    --ink-soft:#2a3140;
+    --paper:#f2ede2;
+    --paper-2:#e9e2d1;
+    --brass:#a9803f;
+    --brass-deep:#7c5c2b;
+    --lagoon:#1f4a45;
+    --line:#d8cfb9;
+    --muted:#6b6a63;
+    --ok-bg:#eef4ee;
+    --ok-line:#b9d0ba;
+    --ok-ink:#28492b;
+    font-family:'Inter',system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  :root{ background:var(--paper); color:var(--ink); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --paper:#141311; --paper-2:#1c1a17; --ink:#f0ece1; --ink-soft:#d9d3c2; --line:#33302a; --muted:#a39d8c; --ok-bg:#16241a; --ok-line:#2b4531; --ok-ink:#a6d3ac; }
+  }
+  :root[data-theme="dark"]{ --paper:#141311; --paper-2:#1c1a17; --ink:#f0ece1; --ink-soft:#d9d3c2; --line:#33302a; --muted:#a39d8c; --ok-bg:#16241a; --ok-line:#2b4531; --ok-ink:#a6d3ac; }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    line-height:1.55;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(169,128,63,.18), transparent 60%),
+      linear-gradient(180deg,#0d1016 0%, #14181f 60%, #171c24 100%);
+    color:#efe9db;
+    padding:56px 0 44px;
+    border-bottom:1px solid #2a2f38;
+  }
+  .kicker{
+    font-size:13px;
+    color:#c9a769;
+    margin:0 0 18px;
+    font-weight:500;
+    letter-spacing:.01em;
+  }
+  .kicker::before{content:"— ";color:#7c6636;}
+  .hero h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:clamp(30px,5.4vw,42px);
+    line-height:1.08;
+    margin:0 0 14px;
+    max-width:15ch;
+    letter-spacing:-.01em;
+  }
+  .hero .loc{
+    color:#b7bdc9;
+    font-size:15.5px;
+    margin:0 0 26px;
+    max-width:46ch;
+  }
+  .plot{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    border-top:1px solid #2a2f38;
+    padding-top:22px;
+  }
+  .plot svg{flex:0 0 auto;display:block;}
+  .plot-figs{display:flex;flex-direction:column;gap:2px;}
+  .plot-price{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:22px;
+    color:#f1e6c9;
+  }
+  .plot-sub{font-size:13px;color:#8d94a3;}
+
+  /* ---------- Form card ---------- */
+  main{padding:40px 0 60px;}
+  .intro{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 30px;
+  }
+  form{background:transparent;}
+  .section{
+    padding:26px 0 30px;
+    border-top:1px solid var(--line);
+  }
+  .section:first-of-type{border-top:none;padding-top:0;}
+  .section-num{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:13px;
+    color:var(--brass-deep);
+    margin:0 0 4px;
+  }
+  .section h2{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:21px;
+    margin:0 0 4px;
+    color:var(--ink);
+  }
+  .section .section-sub{
+    font-size:13.5px;
+    color:var(--muted);
+    margin:0 0 18px;
+  }
+
+  .field{margin:16px 0;}
+  .field label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .field input,.field select{
+    width:100%;
+    padding:12px 13px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:var(--paper-2);
+    color:var(--ink);
+    font:inherit;
+    font-size:15px;
+    appearance:none;
+  }
+  .field select{
+    background-image:linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 22px, calc(100% - 13px) 22px;
+    background-size:5px 5px, 5px 5px;
+    background-repeat:no-repeat;
+    padding-right:36px;
+  }
+  .field input:focus,.field select:focus{
+    outline:2px solid var(--brass);
+    outline-offset:1px;
+    border-color:var(--brass);
+  }
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:520px){ .row2{grid-template-columns:1fr;} }
+
+  .phone-row{display:grid;grid-template-columns:118px 1fr;gap:10px;}
+  .phone-row select{padding-right:30px;background-position: calc(100% - 12px) 19px, calc(100% - 8px) 19px;}
+  .field-hint{font-size:12.5px;color:var(--muted);margin:6px 0 0;}
+
+  .field.error input,.field.error select{
+    border-color:#b3462c;
+    background:#fbeee9;
+  }
+  .field-error{
+    display:none;
+    font-size:12.5px;
+    color:#b3462c;
+    margin:6px 0 0;
+  }
+  .field.error .field-error{display:block;}
+  .form-alert{
+    display:none;
+    background:#fbeee9;
+    border:1px solid #e0b6a8;
+    color:#8a3420;
+    font-size:14px;
+    padding:12px 14px;
+    border-radius:4px;
+    margin:0 0 20px;
+  }
+  .form-alert.show{display:block;}
+    font-size:12.5px;
+    color:var(--muted);
+    border-left:2px solid var(--line);
+    padding-left:12px;
+    margin:28px 0 22px;
+  }
+
+  .btn{
+    width:100%;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    font:inherit;
+    font-size:15.5px;
+    font-weight:600;
+    padding:16px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .15s ease, transform .05s ease;
+  }
+  .btn:hover{background:var(--ink-soft);}
+  .btn:active{transform:translateY(1px);}
+  .btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
+
+  .result{
+    display:none;
+    margin-top:20px;
+    padding:18px 20px;
+    border-radius:4px;
+    background:var(--ok-bg);
+    border:1px solid var(--ok-line);
+  }
+  .result h2{
+    font-family:'Fraunces',Georgia,serif;
+    margin:0 0 6px;
+    color:var(--ok-ink);
+    font-size:19px;
+    font-weight:500;
+  }
+  .result p{margin:0;color:var(--ink-soft);font-size:14.5px;}
+
+  footer{
+    max-width:640px;margin:0 auto;padding:0 24px 40px;
+    color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:20px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn{transition:none;}
+  }
+
+  /* ---------- Thank-you page ---------- */
+  .thanks-page{
+    display:none;
+    min-height:100dvh;
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(169,128,63,.16), transparent 60%),
+      linear-gradient(180deg,#0d1016 0%, #14181f 55%, #171c24 100%);
+    color:#efe9db;
+  }
+  .thanks-wrap{
+    padding:64px 24px 40px;
+    min-height:calc(100dvh - 90px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .thanks-mark{margin:0 0 22px;}
+  .thanks-page h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:500;
+    font-size:clamp(26px,5vw,34px);
+    margin:0 0 14px;
+    color:#f1e6c9;
+  }
+  .thanks-body{
+    font-size:15.5px;
+    color:#cdd3de;
+    max-width:46ch;
+    margin:0 0 22px;
+  }
+  .thanks-sub{
+    font-size:13px;
+    color:#8d94a3;
+    border-top:1px solid #2a2f38;
+    padding-top:16px;
+    max-width:46ch;
+  }
+  .thanks-page footer{
+    color:#7d8390;
+    border-top:1px solid #2a2f38;
+  }
 </style>
 </head>
 <body>
-<header class="hero"><div class="wrap"><p class="eyebrow">Private Property Briefing</p><h1>Luxury 5-Bedroom Duplex in Osapa London</h1><p>Osapa London, Lekki, Lagos · Request information and private viewing details.</p><span class="price">₦1.7 BILLION</span></div></header>
-<main class="wrap"><form class="card" id="buyerForm">
-<p class="hint">This property is listed at ₦1.7 billion. Please answer a few questions so the property representative can share the right information and arrange private viewing details with suitable buyers.</p>
-<fieldset><legend>Your contact details</legend><label for="name">Full name *</label><input id="name" name="name" required><label for="phone">WhatsApp number *</label><input id="phone" name="phone" type="tel" required><label for="email">Email address *</label><input id="email" name="email" type="email" required><label for="time">Preferred contact time *</label><select id="time" name="time" required><option value="">Select one</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>WhatsApp first</option></select></fieldset>
-<fieldset><legend>About the acquisition</legend><label for="purpose">What are you considering this property for? *</label><select id="purpose" name="purpose" required><option value="">Select one</option><option>Personal residence</option><option>Family residence</option><option>Corporate or executive residence</option><option>Investment</option><option>Representing a buyer</option><option>Other</option></select><label for="budget">What budget range are you working with? *</label><select id="budget" name="budget" required><option value="">Select one</option><option value="-25">Below ₦1 billion</option><option value="10">₦1 billion–₦1.49 billion</option><option value="30">₦1.5 billion–₦1.99 billion</option><option value="30">₦2 billion and above</option><option value="10">I represent a buyer</option><option value="0">I am still assessing the opportunity</option></select><label for="funding">How do you expect to fund the acquisition? *</label><select id="funding" name="funding" required><option value="">Select one</option><option value="30">Available cash or liquid funds</option><option value="30">Corporate funds</option><option value="25">Approved bank financing</option><option value="10">Financing still under review</option><option value="5">Sale of another asset</option><option value="5">Investor or partner funding</option><option value="-10">Expected future funds</option><option value="-10">Still exploring options</option></select><label for="timeline">If suitable, when could you proceed? *</label><select id="timeline" name="timeline" required><option value="">Select one</option><option value="20">Immediately</option><option value="20">Within 30 days</option><option value="18">Within 1–3 months</option><option value="10">Within 3–6 months</option><option value="5">Within 6–12 months</option><option value="-15">Research stage only</option></select><label for="role">What is your role in this acquisition? *</label><select id="role" name="role" required><option value="">Select one</option><option value="15">I am the principal buyer</option><option value="15">I am a company decision-maker</option><option value="10">I represent the buying company</option><option value="10">I represent a buyer</option><option value="0">I am gathering information for someone else</option></select><label for="next">What would you like to do next? *</label><select id="next" name="next" required><option value="">Select one</option><option value="10">Request a private viewing</option><option value="5">Speak with the property representative</option><option value="5">Receive the confidential property briefing</option><option value="0">Review documentation information</option><option value="-15">I am only researching</option></select></fieldset>
-<p class="consent">Your information will be used by the property representative to respond to this enquiry and discuss the property briefing or private viewing process.</p><button class="btn" type="submit">Request Private Property Briefing</button><div class="result" id="result"><h2>Request received</h2><p id="resultText"></p></div>
-</form></main><footer class="footer">Presented by the authorised property representative. Verify all property and documentation details through the representative before making a commitment.</footer>
+
+<div id="page-form">
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Private Property Briefing</p>
+    <h1>Five-Bedroom Duplex, Osapa London</h1>
+    <p class="loc">Osapa London, Lekki, Lagos. Shared by the authorised property representative for serious enquiries only.</p>
+    <div class="plot">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M23 4 L42 16 V40 H4 V16 Z" stroke="#c9a769" stroke-width="1.4"/>
+        <path d="M23 4 L23 16" stroke="#c9a769" stroke-width="1.4"/>
+        <rect x="19" y="27" width="8" height="13" stroke="#c9a769" stroke-width="1.2"/>
+        <rect x="9" y="21" width="6" height="6" stroke="#c9a769" stroke-width="1"/>
+        <rect x="31" y="21" width="6" height="6" stroke="#c9a769" stroke-width="1"/>
+      </svg>
+      <div class="plot-figs">
+        <span class="plot-price">₦1.7 billion</span>
+        <span class="plot-sub">Five bedrooms · private compound · Osapa London</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="intro">A short profile helps the representative prepare the right documentation and arrange a private viewing with genuinely positioned buyers. Five minutes, in confidence.</p>
+
+  <p class="form-alert" id="formAlert">Please fill in the highlighted fields below before continuing.</p>
+
+  <form id="buyerForm" novalidate>
+
+    <div class="section">
+      <p class="section-num">I.</p>
+      <h2>Your details</h2>
+      <p class="section-sub">How the representative should reach you.</p>
+
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="phone">WhatsApp number</label>
+        <div class="phone-row">
+          <select id="phoneCode" name="phoneCode" aria-label="Country calling code" required>
+            <option value="+234">🇳🇬 +234</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+1">🇺🇸/🇨🇦 +1</option>
+            <option value="+971">🇦🇪 +971</option>
+            <option value="+27">🇿🇦 +27</option>
+            <option value="+233">🇬🇭 +233</option>
+            <option value="other">Other code</option>
+          </select>
+          <input id="phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="e.g. 803 123 4567">
+        </div>
+        <input id="phoneCodeOther" name="phoneCodeOther" type="text" inputmode="tel" placeholder="Enter your country code, e.g. +49" style="display:none;margin-top:10px;">
+        <p class="field-hint">Select your country code, then enter the number. Any country welcome.</p>
+      </div>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="time">Preferred contact time</label>
+        <select id="time" name="time" required>
+          <option value="">Select one</option>
+          <option>Morning</option>
+          <option>Afternoon</option>
+          <option>Evening</option>
+          <option>WhatsApp first</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-num">II.</p>
+      <h2>The acquisition</h2>
+      <p class="section-sub">This shapes what the representative sends you first.</p>
+
+      <div class="field">
+        <label for="purpose">What are you considering this property for?</label>
+        <select id="purpose" name="purpose" required>
+          <option value="">Select one</option>
+          <option>Personal residence</option>
+          <option>Family residence</option>
+          <option>Corporate or executive residence</option>
+          <option>Investment</option>
+          <option>Representing a buyer</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="budget">What budget range are you working with?</label>
+        <select id="budget" name="budget" required>
+          <option value="">Select one</option>
+          <option value="-25">Below ₦1 billion</option>
+          <option value="10">₦1 billion – ₦1.49 billion</option>
+          <option value="30">₦1.5 billion – ₦1.99 billion</option>
+          <option value="40">₦2 billion and above</option>
+          <option value="10">I represent a buyer</option>
+          <option value="0">Still assessing the opportunity</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="funding">How do you expect to fund the acquisition?</label>
+        <select id="funding" name="funding" required>
+          <option value="">Select one</option>
+          <option value="30">Available cash or liquid funds</option>
+          <option value="30">Corporate funds</option>
+          <option value="25">Approved bank financing</option>
+          <option value="10">Financing still under review</option>
+          <option value="5">Sale of another asset</option>
+          <option value="5">Investor or partner funding</option>
+          <option value="-10">Expected future funds</option>
+          <option value="-10">Still exploring options</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="timeline">If suitable, when could you proceed?</label>
+        <select id="timeline" name="timeline" required>
+          <option value="">Select one</option>
+          <option value="20">Immediately</option>
+          <option value="20">Within 30 days</option>
+          <option value="18">Within 1–3 months</option>
+          <option value="10">Within 3–6 months</option>
+          <option value="5">Within 6–12 months</option>
+          <option value="-15">Research stage only</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="role">What is your role in this acquisition?</label>
+        <select id="role" name="role" required>
+          <option value="">Select one</option>
+          <option value="15">I am the principal buyer</option>
+          <option value="15">I am a company decision-maker</option>
+          <option value="10">I represent the buying company</option>
+          <option value="10">I represent a buyer</option>
+          <option value="0">I am gathering information for someone else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="next">What would you like to do next?</label>
+        <select id="next" name="next" required>
+          <option value="">Select one</option>
+          <option value="10">Request a private viewing</option>
+          <option value="5">Speak with the property representative</option>
+          <option value="5">Receive the confidential property briefing</option>
+          <option value="0">Review documentation information</option>
+          <option value="-15">I am only researching</option>
+        </select>
+      </div>
+    </div>
+
+    <p class="consent">Your information is used by the property representative to respond to this enquiry and, where appropriate, arrange a private viewing or share the property briefing. It is not shared beyond that purpose.</p>
+
+    <button class="btn" type="submit">Request the private briefing</button>
+  </form>
+</main>
+
+<footer>
+  Shared by the authorised property representative. Please verify all property and documentation details directly with the representative before making any commitment.
+</footer>
+
+</div>
+
+<div id="page-thanks" class="thanks-page">
+  <div class="wrap thanks-wrap">
+    <p class="kicker">Private Property Briefing</p>
+    <div class="thanks-mark" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18.5" stroke="#c9a769" stroke-width="1.4"/>
+        <path d="M12 20.5 L17.5 26 L28.5 14" stroke="#c9a769" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1>Request received</h1>
+    <p class="thanks-body">Thank you. The property representative will review your details and reach out using the contact method and time you selected.</p>
+    <p class="thanks-sub">Osapa London, Lekki, Lagos · ₦1.7 billion</p>
+  </div>
+  <footer>
+    Shared by the authorised property representative. Please verify all property and documentation details directly with the representative before making any commitment.
+  </footer>
+</div>
+
 <script>
-const form=document.getElementById('buyerForm');form.addEventListener('submit',e=>{e.preventDefault();const vals=[...form.querySelectorAll('select')].map(x=>Number(x.value||0));const score=vals.reduce((a,b)=>a+b,0);let band=score>=70?'Priority buyer':score>=45?'Active prospect':'Nurture or clarification';const r=document.getElementById('result');document.getElementById('resultText').textContent='Thank you. Your request has been received. A member of the property team will review your requirements and contact you using the details provided.';r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'center'});console.log({internalScore:score,internalRoute:band});});
+  const form = document.getElementById('buyerForm');
+  const phoneCodeSelect = document.getElementById('phoneCode');
+  const phoneCodeOther = document.getElementById('phoneCodeOther');
+
+  phoneCodeSelect.addEventListener('change', () => {
+    const isOther = phoneCodeSelect.value === 'other';
+    phoneCodeOther.style.display = isOther ? 'block' : 'none';
+    phoneCodeOther.required = isOther;
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // clear previous error states
+    form.querySelectorAll('.field.error').forEach(f => f.classList.remove('error'));
+    let firstInvalid = null;
+
+    form.querySelectorAll('[required]').forEach(el => {
+      const isHidden = el.style.display === 'none' || el.closest('[style*="display: none"], [style*="display:none"]');
+      if (isHidden) return;
+      if (!el.value || el.value.trim() === '') {
+        const field = el.closest('.field');
+        if (field) field.classList.add('error');
+        if (!firstInvalid) firstInvalid = field || el;
+      }
+    });
+
+    const alertBox = document.getElementById('formAlert');
+
+    if (firstInvalid) {
+      alertBox.classList.add('show');
+      firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    alertBox.classList.remove('show');
+
+    const vals = [...form.querySelectorAll('select')]
+      .filter(x => x.id !== 'phoneCode')
+      .map(x => Number(x.value || 0));
+    const score = vals.reduce((a,b) => a+b, 0);
+    const band = score >= 70 ? 'priority' : score >= 45 ? 'active' : 'nurture';
+
+    document.getElementById('page-thanks').setAttribute('data-lead-band', band);
+    document.getElementById('page-form').style.display = 'none';
+    document.getElementById('page-thanks').style.display = 'block';
+    window.scrollTo({top: 0, behavior: 'instant'});
+    document.title = 'Request received — Osapa London Briefing';
+  });
 </script>
+
 </body>
 </html>
