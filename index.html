@@ -659,11 +659,20 @@
     ].join('\n');
 
     const wa = document.getElementById('whatsappLink');
-    wa.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    wa.style.display = 'inline-block';
-    document.getElementById('thanksStatus').textContent = sent
-      ? 'Your enquiry has been sent to the property representative.'
-      : 'Your request is ready. You can continue on WhatsApp below.';
+    const qualified = score >= 45; // priority and active; nurture is below 45
+    if (qualified) {
+      wa.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      wa.style.display = 'inline-block';
+      document.getElementById('thanksStatus').textContent = sent
+        ? 'You qualify for a direct conversation with the property representative.'
+        : 'You qualify for a direct conversation. Continue on WhatsApp below.';
+    } else {
+      wa.removeAttribute('href');
+      wa.style.display = 'none';
+      document.getElementById('thanksStatus').textContent = sent
+        ? 'Thank you. Your enquiry has been recorded and the representative may follow up with relevant information.'
+        : 'Thank you. Your enquiry has been recorded for follow-up.';
+    }
     document.getElementById('page-form').style.display = 'none';
     document.getElementById('page-thanks').style.display = 'block';
     window.scrollTo({top: 0, behavior: 'instant'});
